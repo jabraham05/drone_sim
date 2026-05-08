@@ -74,6 +74,7 @@ docs/
   development_process.md
   integration_guide.md
   interface_contracts.md
+  object_avoidance.md
   roadmap.md
   running_simulation.md
   setup.md

@@ -11,6 +11,10 @@ This document will track the project roadmap from simulation baseline through re
 5. Safety and real-drone readiness
 6. Advanced autonomy
 
+## Design Documents
+
+- `docs/object_avoidance.md`: planned Depth/LiDAR obstacle avoidance and emergency-stop test scenario.
+
 ## Next Steps
 
 Current priorities:
