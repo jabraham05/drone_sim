@@ -1,0 +1,60 @@
+# Testing Checklist
+
+Use this checklist before merging feature branches.
+
+## General Checks
+
+- The package imports successfully.
+- Unit tests pass.
+- No generated files are committed.
+- No hard-coded local-only paths are required.
+- Documentation is updated for changed behavior.
+
+## Commands
+
+Run Python syntax validation:
+
+```bash
+python3 -m compileall src
+```
+
+When ROS 2 is available, run package tests from the workspace root:
+
+```bash
+colcon test
+colcon test-result --verbose
+```
+
+When a package is ready to build with ROS 2:
+
+```bash
+colcon build
+```
+
+## ArUco / Perception Checks
+
+- Static image test detects the expected marker ID.
+- Detector handles no-marker images without crashing.
+- Detector documents required camera topic and output topics.
+- Camera calibration assumptions are documented.
+- Gazebo camera bridge is tested when a machine with Gazebo support is available.
+
+## PX4 / Vehicle Control Checks
+
+- Unit tests cover command creation or command publishing.
+- Offboard setpoint streaming behavior is tested with mocks when SITL is unavailable.
+- Code documents required PX4 topics and message types.
+- SITL test status is recorded: tested, not tested, or blocked by hardware.
+- Manual override and failsafe assumptions are documented.
+
+## Full Simulation Checks
+
+Run these when PX4 SITL and Gazebo are available:
+
+- PX4 starts with the `food_delivery` world.
+- Micro XRCE-DDS Agent connects.
+- ROS 2 nodes start without import or parameter errors.
+- Drone arms and enters Offboard mode.
+- Drone completes takeoff, delivery waypoint, landing, wait, return home, and final landing.
+- Logs or rosbag output are captured for the run.
+

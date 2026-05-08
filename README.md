@@ -72,9 +72,12 @@ Custom World + Sensors
 docs/
   architecture.md
   development_process.md
+  integration_guide.md
+  interface_contracts.md
   roadmap.md
   running_simulation.md
   setup.md
+  testing_checklist.md
   troubleshooting.md
 src/
   drone_bringup/      # Launch files and runtime configuration
@@ -96,6 +99,12 @@ This project follows a documentation-first and documentation-last workflow:
 5. Run relevant validation checks.
 
 Code changes are not complete until the docs are updated. See `docs/development_process.md` for the full workflow.
+
+## Team Integration
+
+- Use `docs/integration_guide.md` when adding teammate work.
+- Use `docs/interface_contracts.md` to keep ROS 2 package boundaries clear.
+- Use `docs/testing_checklist.md` before merging feature branches.
 
 ## Repository Goals
 
