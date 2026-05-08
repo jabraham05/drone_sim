@@ -84,41 +84,65 @@ Responsibilities:
 - Node composition and parameter wiring
 - Repeatable simulation startup entrypoints
 
+## Topic Standard
+
+Project-owned ROS topics must use one namespace:
+
+```text
+/drone/...
+```
+
+Use this namespace for communication between project packages. Do not create new top-level project topics such as `/landing_pad/...`, `/mission/...`, or `/vehicle/...`.
+
+External system topics are allowed only at adapter boundaries:
+
+- PX4 bridge topics stay under `/fmu/...` and are owned by `drone_vehicle`.
+- Camera driver or Gazebo camera topics may stay under their source namespace and are owned by `drone_perception`.
+
+Other packages should not publish or subscribe directly to external PX4 or raw camera topics unless the interface contract is updated.
+
 ## Initial Topic Contract
 
 These names are the initial intended interface. They can change as implementation details become clearer, but changes must update this file and the affected docs.
 
 ### Vehicle Interface
 
-Inputs consumed by `drone_vehicle`:
+External PX4 inputs consumed only by `drone_vehicle`:
 
 - `/fmu/out/vehicle_status`
 - `/fmu/out/vehicle_local_position`
 - `/fmu/out/vehicle_odometry`
 
-Outputs published by `drone_vehicle`:
+External PX4 outputs published only by `drone_vehicle`:
 
 - `/fmu/in/offboard_control_mode`
 - `/fmu/in/trajectory_setpoint`
 - `/fmu/in/vehicle_command`
 
-Mission-facing API target:
+Project-owned vehicle topics:
 
-- The mission layer should call a vehicle abstraction rather than publishing raw PX4 messages directly.
-- The first implementation may be an in-process Python class.
-- A later implementation may expose ROS services/actions if separate mission and vehicle nodes are needed.
+- `/drone/vehicle/status`
+- `/drone/vehicle/local_position`
+- `/drone/vehicle/odometry`
+- `/drone/vehicle/command`
+- `/drone/vehicle/setpoint`
+
+Mission-facing API rule:
+
+- `drone_mission` should communicate through `/drone/vehicle/...` topics or a vehicle abstraction.
+- `drone_mission` must not publish raw PX4 `/fmu/in/...` messages directly.
 
 ### Perception Interface
 
-Inputs consumed by `drone_perception`:
+External camera inputs consumed only by `drone_perception`:
 
 - `/camera/image_raw`
 - `/camera/camera_info`
 
-Outputs published by `drone_perception`:
+Project-owned perception topics:
 
-- `/landing_pad/marker_pose`
-- `/landing_pad/detection_status`
+- `/drone/perception/landing_pad/marker_pose`
+- `/drone/perception/landing_pad/detection_status`
 
 Initial behavior:
 
@@ -130,12 +154,12 @@ Initial behavior:
 Mission inputs:
 
 - Mission config from `src/drone_bringup/config/mission.yaml`
-- Vehicle health and position from `drone_vehicle`
-- Landing marker status from `drone_perception` when precision landing is enabled
+- Vehicle health and position from `/drone/vehicle/...`
+- Landing marker status from `/drone/perception/...` when precision landing is enabled
 
 Mission outputs:
 
-- Vehicle commands through `drone_vehicle`
+- Vehicle commands through `/drone/vehicle/...`
 - Mission state logs through ROS 2 logging
 - Structured mission event logs in a future logging module
 
@@ -156,4 +180,3 @@ Expected mission fields:
 - Cruise altitude
 - Acceptance radius
 - Delivery wait duration
-

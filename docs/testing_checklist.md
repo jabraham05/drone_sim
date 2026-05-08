@@ -9,6 +9,7 @@ Use this checklist before merging feature branches.
 - No generated files are committed.
 - No hard-coded local-only paths are required.
 - Documentation is updated for changed behavior.
+- Project-owned ROS topics use the `/drone/...` namespace.
 
 ## Commands
 
@@ -34,7 +35,13 @@ colcon build
 Run lightweight unit tests without ROS 2, PX4, or Gazebo:
 
 ```bash
-pytest src
+pytest src tests
+```
+
+Run only project validation tests:
+
+```bash
+pytest tests
 ```
 
 ## GitHub Actions
@@ -45,15 +52,27 @@ It runs on every push and pull request:
 
 - Python setup
 - `python -m compileall src`
-- `pytest src`
+- `pytest src tests`
 
 This CI does not run PX4 SITL, Gazebo, or full ROS 2 `colcon` checks. Those remain local or integration-machine validation steps.
+
+## Topic Namespace Validation
+
+Project topic rules are checked by `tests/test_topic_namespace.py`.
+
+The validation enforces:
+
+- Project-owned topics do not use `/landing_pad/...`, `/mission/...`, or `/vehicle/...`.
+- PX4 `/fmu/...` topics appear only in `drone_vehicle`.
+- Raw camera `/camera/...` topics appear only in `drone_perception`.
+
+Use `/drone/...` for communication between project packages.
 
 ## ArUco / Perception Checks
 
 - Static image test detects the expected marker ID.
 - Detector handles no-marker images without crashing.
-- Detector documents required camera topic and output topics.
+- Detector documents required raw camera topic and `/drone/perception/...` output topics.
 - Camera calibration assumptions are documented.
 - Gazebo camera bridge is tested when a machine with Gazebo support is available.
 
@@ -61,7 +80,7 @@ This CI does not run PX4 SITL, Gazebo, or full ROS 2 `colcon` checks. Those rema
 
 - Unit tests cover command creation or command publishing.
 - Offboard setpoint streaming behavior is tested with mocks when SITL is unavailable.
-- Code documents required PX4 topics and message types.
+- Code documents required PX4 `/fmu/...` topics, project `/drone/vehicle/...` topics, and message types.
 - SITL test status is recorded: tested, not tested, or blocked by hardware.
 - Manual override and failsafe assumptions are documented.
 

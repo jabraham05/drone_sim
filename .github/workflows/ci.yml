@@ -27,5 +27,4 @@ jobs:
         run: python -m compileall src
 
       - name: Run unit tests
-        run: pytest src
-
+        run: pytest src tests

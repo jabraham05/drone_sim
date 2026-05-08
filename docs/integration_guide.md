@@ -39,6 +39,17 @@ Every feature branch should include:
 - Documentation updates for changed behavior, commands, topics, or assumptions
 - Notes about anything that was not tested locally
 
+## Topic Naming Rule
+
+Project-owned ROS topics must use the `/drone/...` namespace defined in `docs/interface_contracts.md`.
+
+Do not add new project-level topics like `/landing_pad/...`, `/mission/...`, or `/vehicle/...`.
+
+Allowed external topic exceptions:
+
+- PX4 bridge topics under `/fmu/...` belong only inside `src/drone_vehicle`.
+- Raw camera topics such as `/camera/image_raw` belong only inside `src/drone_perception`.
+
 ## CV Workstream Checklist
 
 For ArUco detection work, include:
@@ -47,7 +58,7 @@ For ArUco detection work, include:
 - Static test image or generated fixture
 - Test that verifies marker detection from a known image
 - Expected camera topic name
-- Expected output topic name and message type
+- Expected `/drone/perception/...` output topic name and message type
 - Camera calibration assumptions
 - OpenCV version or dependency notes
 
@@ -64,6 +75,7 @@ For PX4 control work, include:
 - Vehicle interface source code
 - Unit tests with mocked PX4 messages or mocked publishers/subscribers
 - Expected PX4 ROS 2 topics
+- Expected `/drone/vehicle/...` project topics
 - Required PX4 message types
 - Assumptions about arming, Offboard mode, and setpoint streaming
 - Notes if Gazebo/PX4 SITL was not tested locally
@@ -81,7 +93,7 @@ Before merging a branch:
 - The code is in the correct package.
 - The branch does not introduce unrelated rewrites.
 - Tests pass locally where possible.
+- Topic namespace validation passes.
 - Documentation is updated.
 - Any untested PX4/Gazebo behavior is clearly documented.
 - The feature can be launched, tested, or imported without hidden local-only paths.
-

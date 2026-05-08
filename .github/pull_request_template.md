@@ -17,10 +17,15 @@ Describe the change and why it is needed.
 
 List any changed ROS topics, services, actions, parameters, launch files, configs, mission states, or simulation assumptions.
 
+- [ ] Project-owned ROS topics use `/drone/...`.
+- [ ] PX4 `/fmu/...` topics are isolated to `drone_vehicle`.
+- [ ] Raw camera topics are isolated to `drone_perception`.
+
 ## Tests Run
 
 - [ ] `python3 -m compileall src`
-- [ ] `pytest`
+- [ ] `pytest src tests`
+- [ ] `pytest tests`
 - [ ] `colcon build`
 - [ ] `colcon test`
 - [ ] PX4 SITL
@@ -35,4 +40,3 @@ List anything that was not tested and why.
 - [ ] Relevant docs were read before implementation.
 - [ ] Affected docs were updated after implementation.
 - [ ] No documentation update needed because:
-
