@@ -13,10 +13,11 @@ SPEC.loader.exec_module(drone_launcher)
 
 def test_default_mission_exists():
     assert "simple_delivery" in drone_launcher.MISSIONS
+    assert "vertical_test" in drone_launcher.MISSIONS
 
 
 def test_launch_commands_include_required_stack_parts():
-    mission = drone_launcher.MISSIONS["simple_delivery"]
+    mission = drone_launcher.MISSIONS["vertical_test"]
     commands = drone_launcher.build_launch_commands(
         mission,
         Path("/tmp/PX4-Autopilot"),
@@ -35,7 +36,7 @@ def test_plan_command_does_not_start_processes(capsys):
         [
             "plan",
             "--mission",
-            "simple_delivery",
+            "vertical_test",
             "--px4-dir",
             "/tmp/PX4-Autopilot",
             "--workspace-dir",

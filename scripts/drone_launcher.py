@@ -32,6 +32,13 @@ class LaunchCommand:
 
 
 MISSIONS = {
+    "vertical_test": Mission(
+        name="vertical_test",
+        description="Take off, hold position, then land.",
+        config_path=REPO_ROOT / "src" / "drone_bringup" / "config" / "vertical_test.yaml",
+        world="food_delivery",
+        ros_entrypoint="ros2 run drone_mission offboard_takeoff",
+    ),
     "simple_delivery": Mission(
         name="simple_delivery",
         description="Baseline home-to-delivery-to-home mission.",
@@ -169,4 +176,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

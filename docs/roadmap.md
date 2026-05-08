@@ -17,11 +17,12 @@ Current priorities:
 
 1. Commit the repository governance updates: GitHub templates, CI workflow, and documentation updates.
 2. Ask teammates to submit their completed ArUco and drone-control work on separate feature branches.
-3. Integrate drone-control work into `src/drone_vehicle` first, because mission execution depends on a stable vehicle interface.
-4. Integrate ArUco detection into `src/drone_perception` after the control branch is reviewable.
-5. Update `docs/interface_contracts.md` if either branch needs a new `/drone/...` topic, message type, or config field.
-6. Run lightweight CI checks on each branch with `python3 -m compileall src` and `python3 -m pytest src`.
-7. Schedule PX4/Gazebo SITL validation once the control and perception branches are both merged or ready for integration testing.
+3. Use `vertical_test` as the first mission for validating drone-control integration.
+4. Integrate drone-control work into `src/drone_vehicle` first, because mission execution depends on a stable vehicle interface.
+5. Integrate ArUco detection into `src/drone_perception` after the control branch is reviewable.
+6. Update `docs/interface_contracts.md` if either branch needs a new `/drone/...` topic, message type, or config field.
+7. Run lightweight CI checks on each branch with `python3 -m compileall src scripts tests` and `python3 -m pytest src tests`.
+8. Schedule PX4/Gazebo SITL validation once the control and perception branches are both merged or ready for integration testing.
 
 ## Current Blockers
 

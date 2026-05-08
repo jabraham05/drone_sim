@@ -1,0 +1,21 @@
+mission:
+  name: vertical_test
+  type: vertical_takeoff_hold_land
+  description: Basic test mission that takes off, holds position, and lands.
+  home:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  takeoff:
+    altitude_m: 5.0
+    climb_timeout_s: 30.0
+  hold:
+    duration_s: 10.0
+    position_tolerance_m: 1.0
+  landing:
+    descent_timeout_s: 30.0
+  sequence:
+    - TAKEOFF
+    - HOLD
+    - LAND
+

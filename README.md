@@ -168,13 +168,13 @@ python3 scripts/drone_launcher.py list-missions
 Preview the commands for a mission:
 
 ```bash
-python3 scripts/drone_launcher.py plan --mission simple_delivery
+python3 scripts/drone_launcher.py plan --mission vertical_test
 ```
 
 Start the full stack:
 
 ```bash
-python3 scripts/drone_launcher.py start --mission simple_delivery
+python3 scripts/drone_launcher.py start --mission vertical_test
 ```
 
 See `docs/running_simulation.md` for launcher details and path overrides.

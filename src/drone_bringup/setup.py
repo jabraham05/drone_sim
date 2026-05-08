@@ -10,7 +10,13 @@ setup(
         ("share/ament_index/resource_index/packages", [f"resource/{package_name}"]),
         (f"share/{package_name}", ["package.xml"]),
         (f"share/{package_name}/launch", ["launch/sitl_delivery.launch.py"]),
-        (f"share/{package_name}/config", ["config/mission.yaml"]),
+        (
+            f"share/{package_name}/config",
+            [
+                "config/mission.yaml",
+                "config/vertical_test.yaml",
+            ],
+        ),
     ],
     install_requires=["setuptools"],
     zip_safe=True,
@@ -19,4 +25,3 @@ setup(
     description="Launch and configuration orchestration for the autonomous drone delivery simulation.",
     license="MIT",
 )
-

@@ -13,13 +13,13 @@ python3 scripts/drone_launcher.py list-missions
 Show the commands for a mission without starting anything:
 
 ```bash
-python3 scripts/drone_launcher.py plan --mission simple_delivery
+python3 scripts/drone_launcher.py plan --mission vertical_test
 ```
 
 Start the full stack:
 
 ```bash
-python3 scripts/drone_launcher.py start --mission simple_delivery
+python3 scripts/drone_launcher.py start --mission vertical_test
 ```
 
 If `--mission` is omitted for `plan` or `start`, the launcher prompts for a mission.
@@ -35,14 +35,14 @@ Override these paths when needed:
 
 ```bash
 python3 scripts/drone_launcher.py plan \
-  --mission simple_delivery \
+  --mission vertical_test \
   --px4-dir ~/PX4-Autopilot \
   --workspace-dir ~/drone_ws
 ```
 
 ## What The Launcher Starts
 
-For `simple_delivery`, the launcher starts:
+For `vertical_test`, the launcher starts:
 
 1. PX4 SITL with Gazebo:
 
@@ -64,6 +64,11 @@ For `simple_delivery`, the launcher starts:
 
 ## Mission Selection
 
+Current missions:
+
+- `vertical_test`: take off, hold position, then land.
+- `simple_delivery`: home-to-delivery-to-home mission definition.
+
 Available missions are defined in:
 
 ```text
@@ -73,7 +78,7 @@ scripts/drone_launcher.py
 Mission runtime parameters are currently stored in:
 
 ```text
-src/drone_bringup/config/mission.yaml
+src/drone_bringup/config/
 ```
 
 Add new missions by adding a mission config and registering it in the launcher.
