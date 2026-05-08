@@ -31,6 +31,24 @@ When a package is ready to build with ROS 2:
 colcon build
 ```
 
+Run lightweight unit tests without ROS 2, PX4, or Gazebo:
+
+```bash
+pytest src
+```
+
+## GitHub Actions
+
+The repository includes a lightweight CI workflow at `.github/workflows/ci.yml`.
+
+It runs on every push and pull request:
+
+- Python setup
+- `python -m compileall src`
+- `pytest src`
+
+This CI does not run PX4 SITL, Gazebo, or full ROS 2 `colcon` checks. Those remain local or integration-machine validation steps.
+
 ## ArUco / Perception Checks
 
 - Static image test detects the expected marker ID.
@@ -57,4 +75,3 @@ Run these when PX4 SITL and Gazebo are available:
 - Drone arms and enters Offboard mode.
 - Drone completes takeoff, delivery waypoint, landing, wait, return home, and final landing.
 - Logs or rosbag output are captured for the run.
-

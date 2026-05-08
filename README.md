@@ -86,6 +86,9 @@ src/
   drone_perception/   # Camera and landing pad perception
   drone_simulation/   # Gazebo worlds, models, and scenarios
   drone_vehicle/      # PX4 Offboard interface and vehicle health checks
+.github/
+  ISSUE_TEMPLATE/     # Bug and feature integration issue templates
+  workflows/          # CI checks for every push and pull request
 ```
 
 ## Development Process
@@ -105,6 +108,7 @@ Code changes are not complete until the docs are updated. See `docs/development_
 - Use `docs/integration_guide.md` when adding teammate work.
 - Use `docs/interface_contracts.md` to keep ROS 2 package boundaries clear.
 - Use `docs/testing_checklist.md` before merging feature branches.
+- GitHub Actions runs lightweight Python checks on every push and pull request.
 
 ## Repository Goals
 

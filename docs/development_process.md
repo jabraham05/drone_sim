@@ -43,5 +43,16 @@ Each non-trivial change should start with a short plan that states:
 - `docs/setup.md`: Installation and environment setup
 - `docs/running_simulation.md`: Commands for running SITL, Gazebo, DDS, and mission nodes
 - `docs/roadmap.md`: Planned phases and feature status
+- `docs/testing_checklist.md`: Local and CI validation expectations
 - `docs/troubleshooting.md`: Known issues and fixes
+
+## Pull Request Rule
+
+Pull requests should use the repository PR template and must state:
+
+- Which packages changed
+- Which interfaces changed
+- Which tests were run
+- Which docs were updated
+- What was not tested
 
