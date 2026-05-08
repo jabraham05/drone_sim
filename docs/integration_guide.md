@@ -43,6 +43,12 @@ Every feature branch should include:
 
 Project-owned ROS topics must use the `/drone/...` namespace defined in `docs/interface_contracts.md`.
 
+Import shared topic names from:
+
+```text
+src/drone_common/drone_common/topics.py
+```
+
 Do not add new project-level topics like `/landing_pad/...`, `/mission/...`, or `/vehicle/...`.
 
 Allowed external topic exceptions:

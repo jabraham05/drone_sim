@@ -18,6 +18,7 @@ Describe the change and why it is needed.
 List any changed ROS topics, services, actions, parameters, launch files, configs, mission states, or simulation assumptions.
 
 - [ ] Project-owned ROS topics use `/drone/...`.
+- [ ] Topic names are imported from `drone_common.topics`.
 - [ ] PX4 `/fmu/...` topics are isolated to `drone_vehicle`.
 - [ ] Raw camera topics are isolated to `drone_perception`.
 

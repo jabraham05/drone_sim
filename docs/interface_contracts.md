@@ -92,6 +92,14 @@ Project-owned ROS topics must use one namespace:
 /drone/...
 ```
 
+Topic names are centralized in:
+
+```text
+src/drone_common/drone_common/topics.py
+```
+
+Code should import topic constants from `drone_common.topics` instead of hard-coding topic strings.
+
 Use this namespace for communication between project packages. Do not create new top-level project topics such as `/landing_pad/...`, `/mission/...`, or `/vehicle/...`.
 
 External system topics are allowed only at adapter boundaries:

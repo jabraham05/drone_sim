@@ -65,6 +65,7 @@ The validation enforces:
 - Project-owned topics do not use `/landing_pad/...`, `/mission/...`, or `/vehicle/...`.
 - PX4 `/fmu/...` topics appear only in `drone_vehicle`.
 - Raw camera `/camera/...` topics appear only in `drone_perception`.
+- Topic strings are centralized in `src/drone_common/drone_common/topics.py`.
 
 Use `/drone/...` for communication between project packages.
 
