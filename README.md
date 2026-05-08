@@ -100,6 +100,7 @@ This project follows a documentation-first and documentation-last workflow:
 3. Make the code changes.
 4. Update affected documentation.
 5. Run relevant validation checks.
+6. Write suggested next steps.
 
 Code changes are not complete until the docs are updated. See `docs/development_process.md` for the full workflow.
 

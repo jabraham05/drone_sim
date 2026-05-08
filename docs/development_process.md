@@ -12,6 +12,7 @@ Before making a code change:
 4. Make the code changes.
 5. Update the documentation affected by the change.
 6. Run the relevant validation checks.
+7. Write suggested next steps.
 
 ## Documentation Rule
 
@@ -56,3 +57,15 @@ Pull requests should use the repository PR template and must state:
 - Which docs were updated
 - What was not tested
 
+## Next Steps Rule
+
+Every completed change should end with suggested next steps.
+
+The next steps should state:
+
+- The most useful follow-up work
+- Any blockers or missing inputs
+- Which package or document should be touched next
+- Which validation should be run next
+
+Keep next steps short and practical. They should help the team decide what to do after the current change is merged.
