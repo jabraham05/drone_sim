@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<sdf version="1.10">
+  <world name="food_delivery">
+    <!-- Placeholder world. Delivery roads, buildings, and pads will be added next. -->
+  </world>
+</sdf>
+

@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# ROS 2 / colcon
+build/
+install/
+log/
+
+# Local environment
+.env
+.venv/
+venv/
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+

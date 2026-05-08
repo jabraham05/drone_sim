@@ -1,0 +1,13 @@
+mission:
+  home:
+    x: 0.0
+    y: 0.0
+    z: -5.0
+  delivery:
+    x: 25.0
+    y: 15.0
+    z: -5.0
+  cruise_altitude_m: 5.0
+  acceptance_radius_m: 1.0
+  delivery_wait_s: 5.0
+

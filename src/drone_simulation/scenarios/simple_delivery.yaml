@@ -1,0 +1,5 @@
+scenario:
+  name: simple_delivery
+  world: food_delivery
+  description: Baseline home-to-delivery-to-home mission scenario.
+

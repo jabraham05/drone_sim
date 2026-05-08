@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>drone_simulation</name>
+  <version>0.1.0</version>
+  <description>Gazebo worlds, models, and simulation scenarios for drone delivery.</description>
+  <maintainer email="todo@example.com">TODO</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <exec_depend>drone_common</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
+

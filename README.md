@@ -66,6 +66,37 @@ Gazebo Drone Simulation
 Custom World + Sensors
 ```
 
+## Project Structure
+
+```text
+docs/
+  architecture.md
+  development_process.md
+  roadmap.md
+  running_simulation.md
+  setup.md
+  troubleshooting.md
+src/
+  drone_bringup/      # Launch files and runtime configuration
+  drone_common/       # Shared utilities and configuration helpers
+  drone_mission/      # Delivery mission state machines
+  drone_perception/   # Camera and landing pad perception
+  drone_simulation/   # Gazebo worlds, models, and scenarios
+  drone_vehicle/      # PX4 Offboard interface and vehicle health checks
+```
+
+## Development Process
+
+This project follows a documentation-first and documentation-last workflow:
+
+1. Read the relevant documentation.
+2. Create a short plan for the change.
+3. Make the code changes.
+4. Update affected documentation.
+5. Run relevant validation checks.
+
+Code changes are not complete until the docs are updated. See `docs/development_process.md` for the full workflow.
+
 ## Repository Goals
 
 This project aims to evolve into a realistic autonomous drone delivery platform with:
