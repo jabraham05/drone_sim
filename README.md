@@ -157,6 +157,28 @@ source install/setup.bash
 ros2 run drone_mission offboard_takeoff
 ```
 
+### Launcher Script
+
+List available missions:
+
+```bash
+python3 scripts/drone_launcher.py list-missions
+```
+
+Preview the commands for a mission:
+
+```bash
+python3 scripts/drone_launcher.py plan --mission simple_delivery
+```
+
+Start the full stack:
+
+```bash
+python3 scripts/drone_launcher.py start --mission simple_delivery
+```
+
+See `docs/running_simulation.md` for launcher details and path overrides.
+
 ## Planned Features
 
 - Downward-facing camera integration

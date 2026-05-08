@@ -16,7 +16,7 @@ Use this checklist before merging feature branches.
 Run Python syntax validation:
 
 ```bash
-python3 -m compileall src
+python3 -m compileall src scripts tests
 ```
 
 When ROS 2 is available, run package tests from the workspace root:
@@ -51,7 +51,7 @@ The repository includes a lightweight CI workflow at `.github/workflows/ci.yml`.
 It runs on every push and pull request:
 
 - Python setup
-- `python -m compileall src`
+- `python -m compileall src scripts tests`
 - `pytest src tests`
 
 This CI does not run PX4 SITL, Gazebo, or full ROS 2 `colcon` checks. Those remain local or integration-machine validation steps.

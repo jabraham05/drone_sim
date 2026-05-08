@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *.egg-info/
+.pytest_cache/
 
 # ROS 2 / colcon
 build/
@@ -17,4 +18,3 @@ venv/
 .DS_Store
 .vscode/
 .idea/
-
