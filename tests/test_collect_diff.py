@@ -1,4 +1,17 @@
-from scripts.collect_diff import should_include_path, truncate_text
+import importlib.util
+import sys
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+MODULE_FILE = REPO_ROOT / "scripts" / "collect_diff.py"
+SPEC = importlib.util.spec_from_file_location("collect_diff", MODULE_FILE)
+collect_diff = importlib.util.module_from_spec(SPEC)
+sys.modules["collect_diff"] = collect_diff
+SPEC.loader.exec_module(collect_diff)
+
+should_include_path = collect_diff.should_include_path
+truncate_text = collect_diff.truncate_text
 
 
 def test_should_include_path_excludes_generated_files():
@@ -20,4 +33,3 @@ def test_truncate_text_keeps_small_text():
 
     assert text == "abc"
     assert not truncated
-

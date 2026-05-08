@@ -1,12 +1,21 @@
+import importlib.util
 import json
+import sys
+from pathlib import Path
 
-from scripts.ai_code_review import (
-    ReviewResult,
-    build_prompt,
-    parse_review_json,
-    render_markdown,
-    should_block_review,
-)
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+MODULE_FILE = REPO_ROOT / "scripts" / "ai_code_review.py"
+SPEC = importlib.util.spec_from_file_location("ai_code_review", MODULE_FILE)
+ai_code_review = importlib.util.module_from_spec(SPEC)
+sys.modules["ai_code_review"] = ai_code_review
+SPEC.loader.exec_module(ai_code_review)
+
+ReviewResult = ai_code_review.ReviewResult
+build_prompt = ai_code_review.build_prompt
+parse_review_json = ai_code_review.parse_review_json
+render_markdown = ai_code_review.render_markdown
+should_block_review = ai_code_review.should_block_review
 
 
 def test_parse_review_json():
@@ -84,4 +93,3 @@ def test_prompt_mentions_drone_safety_rules():
     assert "/drone/..." in prompt
     assert "PX4" in prompt
     assert "bandit report" in prompt
-
