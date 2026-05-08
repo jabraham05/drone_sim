@@ -37,7 +37,14 @@ MISSIONS = {
         description="Take off, hold position, then land.",
         config_path=REPO_ROOT / "src" / "drone_bringup" / "config" / "vertical_test.yaml",
         world="food_delivery",
-        ros_entrypoint="ros2 run drone_mission offboard_takeoff",
+        ros_entrypoint=(
+            "ros2 run drone_vehicle vertical_takeoff_land "
+            "--ros-args "
+            "-p altitude_m:=5.0 "
+            "-p takeoff_duration_s:=8.0 "
+            "-p hold_duration_s:=10.0 "
+            "-p landing_command_duration_s:=2.0"
+        ),
     ),
     "simple_delivery": Mission(
         name="simple_delivery",

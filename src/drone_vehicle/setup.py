@@ -19,7 +19,7 @@ setup(
     entry_points={
         "console_scripts": [
             "px4_offboard_interface = drone_vehicle.px4_offboard_interface:main",
+            "vertical_takeoff_land = drone_vehicle.vertical_takeoff_land:main",
         ],
     },
 )
-

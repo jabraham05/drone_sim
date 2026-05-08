@@ -82,6 +82,7 @@ Use `/drone/...` for communication between project packages.
 - Unit tests cover command creation or command publishing.
 - Offboard setpoint streaming behavior is tested with mocks when SITL is unavailable.
 - Code documents required PX4 `/fmu/...` topics, project `/drone/vehicle/...` topics, and message types.
+- `vertical_test` timing tests pass without ROS/PX4.
 - SITL test status is recorded: tested, not tested, or blocked by hardware.
 - Manual override and failsafe assumptions are documented.
 

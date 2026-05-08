@@ -8,14 +8,15 @@ mission:
     z: 0.0
   takeoff:
     altitude_m: 5.0
+    duration_s: 8.0
     climb_timeout_s: 30.0
   hold:
     duration_s: 10.0
     position_tolerance_m: 1.0
   landing:
+    command_duration_s: 2.0
     descent_timeout_s: 30.0
   sequence:
     - TAKEOFF
     - HOLD
     - LAND
-

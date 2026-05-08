@@ -28,7 +28,7 @@ def test_launch_commands_include_required_stack_parts():
 
     assert "PX4_GZ_WORLD=food_delivery" in command_text
     assert "micro-xrce-dds-agent udp4 -p 8888" in command_text
-    assert "ros2 run drone_mission offboard_takeoff" in command_text
+    assert "ros2 run drone_vehicle vertical_takeoff_land" in command_text
 
 
 def test_plan_command_does_not_start_processes(capsys):

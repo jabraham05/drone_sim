@@ -139,6 +139,7 @@ Mission-facing API rule:
 
 - `drone_mission` should communicate through `/drone/vehicle/...` topics or a vehicle abstraction.
 - `drone_mission` must not publish raw PX4 `/fmu/in/...` messages directly.
+- The `vertical_takeoff_land` node is the first vehicle-owned smoke mission and may publish PX4 commands directly inside `drone_vehicle`.
 
 ### Perception Interface
 

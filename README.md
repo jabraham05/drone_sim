@@ -125,6 +125,8 @@ This project aims to evolve into a realistic autonomous drone delivery platform 
 
 ## Setup
 
+Full setup instructions are in `docs/setup.md`.
+
 ### Dependencies
 
 - Ubuntu 24.04
@@ -178,6 +180,8 @@ python3 scripts/drone_launcher.py start --mission vertical_test
 ```
 
 See `docs/running_simulation.md` for launcher details and path overrides.
+
+`vertical_test` is the first implemented smoke mission. It pre-streams Offboard setpoints, arms, climbs to 5 m, holds, and commands land.
 
 ## Planned Features
 
