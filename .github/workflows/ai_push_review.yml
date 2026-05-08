@@ -1,0 +1,56 @@
+name: AI Push Review
+
+on:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  ai-push-review:
+    name: OpenAI push review
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Collect pushed diff
+        run: |
+          BASE_REF="${{ github.event.before }}"
+          if [ "$BASE_REF" = "0000000000000000000000000000000000000000" ]; then
+            BASE_REF="4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+          fi
+          python scripts/collect_diff.py \
+            --base "$BASE_REF" \
+            --head "${{ github.sha }}" \
+            --output ai-review/diff.patch \
+            --max-chars "${AI_REVIEW_MAX_DIFF_CHARS:-60000}"
+
+      - name: Run OpenAI push review
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_REVIEW_MODEL: ${{ vars.OPENAI_REVIEW_MODEL || 'gpt-5-nano' }}
+        run: |
+          python scripts/ai_code_review.py \
+            --mode push \
+            --diff-file ai-review/diff.patch \
+            --output-md ai-review/review.md
+
+      - name: Write review summary
+        if: always()
+        run: |
+          if [ -f ai-review/review.md ]; then
+            cat ai-review/review.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "## OpenAI Push Code Review" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "Review did not produce an output file." >> "$GITHUB_STEP_SUMMARY"
+          fi

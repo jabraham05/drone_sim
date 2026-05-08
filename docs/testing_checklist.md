@@ -56,6 +56,13 @@ It runs on every push and pull request:
 
 This CI does not run PX4 SITL, Gazebo, or full ROS 2 `colcon` checks. Those remain local or integration-machine validation steps.
 
+Additional review workflows:
+
+- `.github/workflows/ai_push_review.yml`: advisory OpenAI review for every push.
+- `.github/workflows/ai_pr_safety_review.yml`: static tools plus OpenAI safety/security review for internal PRs.
+
+See `docs/automated_reviews.md` for setup and behavior.
+
 ## Topic Namespace Validation
 
 Project topic rules are checked by `tests/test_topic_namespace.py`.

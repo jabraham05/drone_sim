@@ -24,9 +24,10 @@ List any changed ROS topics, services, actions, parameters, launch files, config
 
 ## Tests Run
 
-- [ ] `python3 -m compileall src`
+- [ ] `python3 -m compileall src scripts tests`
 - [ ] `pytest src tests`
 - [ ] `pytest tests`
+- [ ] AI PR safety review completed
 - [ ] `colcon build`
 - [ ] `colcon test`
 - [ ] PX4 SITL

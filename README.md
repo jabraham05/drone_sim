@@ -71,6 +71,7 @@ Custom World + Sensors
 ```text
 docs/
   architecture.md
+  automated_reviews.md
   development_process.md
   integration_guide.md
   interface_contracts.md
@@ -111,6 +112,7 @@ Code changes are not complete until the docs are updated. See `docs/development_
 - Use `docs/interface_contracts.md` to keep ROS 2 package boundaries clear.
 - Use `docs/testing_checklist.md` before merging feature branches.
 - GitHub Actions runs lightweight Python checks on every push and pull request.
+- Use `docs/automated_reviews.md` to configure OpenAI-backed push and PR reviews.
 
 ## Repository Goals
 

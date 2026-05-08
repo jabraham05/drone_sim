@@ -1,0 +1,96 @@
+name: AI PR Safety Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  ai-pr-safety-review:
+    name: OpenAI PR safety and security review
+    runs-on: ubuntu-24.04
+    if: github.event.pull_request.head.repo.full_name == github.repository
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation and security tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest bandit pip-audit
+
+      - name: Run lightweight validation
+        run: |
+          python -m compileall src scripts tests
+          pytest src tests
+
+      - name: Run static security tools
+        run: |
+          mkdir -p ai-review
+          bandit -r src scripts -f txt -o ai-review/bandit.txt || true
+          pip-audit --progress-spinner off > ai-review/pip-audit.txt 2>&1 || true
+          {
+            echo "## bandit"
+            cat ai-review/bandit.txt
+            echo
+            echo "## pip-audit"
+            cat ai-review/pip-audit.txt
+          } > ai-review/static-report.txt
+
+      - name: Collect PR diff
+        run: |
+          python scripts/collect_diff.py \
+            --base "${{ github.event.pull_request.base.sha }}" \
+            --head "${{ github.event.pull_request.head.sha }}" \
+            --output ai-review/diff.patch \
+            --max-chars "${AI_REVIEW_MAX_DIFF_CHARS:-60000}"
+
+      - name: Run OpenAI PR safety review
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_REVIEW_MODEL: ${{ vars.OPENAI_REVIEW_MODEL || 'gpt-5-nano' }}
+        run: |
+          python scripts/ai_code_review.py \
+            --mode pr \
+            --diff-file ai-review/diff.patch \
+            --static-report ai-review/static-report.txt \
+            --output-md ai-review/review.md \
+            --fail-on-critical
+
+      - name: Comment on PR
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.existsSync('ai-review/review.md')
+              ? fs.readFileSync('ai-review/review.md', 'utf8')
+              : '## OpenAI PR Safety Review\n\nReview did not produce an output file.';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body
+            });
+
+      - name: Write review summary
+        if: always()
+        run: |
+          if [ -f ai-review/review.md ]; then
+            cat ai-review/review.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "## OpenAI PR Safety Review" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "Review did not produce an output file." >> "$GITHUB_STEP_SUMMARY"
+          fi

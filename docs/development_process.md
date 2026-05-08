@@ -41,6 +41,7 @@ Each non-trivial change should start with a short plan that states:
 
 - `README.md`: Project overview, quick start, and repository structure
 - `docs/architecture.md`: System architecture and package responsibilities
+- `docs/automated_reviews.md`: OpenAI-backed push and PR review workflow
 - `docs/setup.md`: Installation and environment setup
 - `docs/running_simulation.md`: Commands for running SITL, Gazebo, DDS, and mission nodes
 - `docs/roadmap.md`: Planned phases and feature status
