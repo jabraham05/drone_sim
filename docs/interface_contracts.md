@@ -141,6 +141,19 @@ Mission-facing API rule:
 - `drone_mission` must not publish raw PX4 `/fmu/in/...` messages directly.
 - The `vertical_takeoff_land` node is the first vehicle-owned smoke mission and may publish PX4 commands directly inside `drone_vehicle`.
 
+### Actual PX4 topic names used by drone_control.py
+Subscribes:
+  /fmu/out/VehicleOdometry
+  /fmu/out/VehicleStatus
+
+Publishes:
+  /fmu/in/OffboardControlMode   (heartbeat, >= 2 Hz)
+  /fmu/in/TrajectorySetpoint    (position commands, NED frame)
+  /fmu/in/VehicleCommand        (arm / land / mode switch)
+
+Note: /drone/vehicle/... bridge topics not yet implemented.
+drone_mission must not call drone_control directly until bridge is added.
+
 ### Perception Interface
 
 External camera inputs consumed only by `drone_perception`:

@@ -88,6 +88,13 @@ src/
   drone_perception/   # Camera and landing pad perception
   drone_simulation/   # Gazebo worlds, models, and scenarios
   drone_vehicle/      # PX4 Offboard interface and vehicle health checks
+    drone_vehicle/
+      drone_control.py      # ROS 2 offboard control node
+      vertical_takeoff_land.py
+      px4_offboard_interface.py
+    test/
+      test_drone_unit.py    # unit tests, no SITL required
+      test_drone_sitl.py    # integration tests, requires PX4 SITL
 .github/
   ISSUE_TEMPLATE/     # Bug and feature integration issue templates
   workflows/          # CI checks for every push and pull request
